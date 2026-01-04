@@ -5,6 +5,7 @@
 
 ## ✨ Key Features
 - **Natural Language Query**: 사용자의 자연어 질문을 이해하고 답변합니다.
+- **Advanced Retrieval**: **Parent-Child Indexing** 전략을 통해 정밀한 검색과 풍부한 문맥을 동시에 제공합니다.
 - **Query Refinement**: LLM을 이용해 모호한 질문을 구체화하거나 검색에 최적화된 형태로 변환합니다.
 - **Multi-Source Integration**: Slack, Confluence, Jira, Notion 등 다양한 데이터 소스를 통합 검색합니다.
 - **Extensible Architecture**: 새로운 데이터 소스를 쉽게 추가할 수 있는 플러그인(Adapter) 구조를 지향합니다.
@@ -38,10 +39,11 @@ graph TD
 
     subgraph "Ingestion Pipeline"
         Sources["Slack / Jira / Wiki / Notion"] --> Adapter[Source Adapters]
-        Adapter --> Chunker[Chunker]
-        Chunker --> Embedder[Embedder]
-        Chunker --> Sparse[Sparse Encoder]
-        Embedder --> VectorDB
+        Adapter --> Processor[Processor]
+        Processor -->|Parent| DocStore[(DocStore)]
+        Processor -->|Child| Embedder[Embedder]
+        Processor -->|Child| Sparse[Sparse Encoder]
+        Embedder --> VectorDB[(Vector DB)]
         Sparse --> VectorDB
     end
 ```
