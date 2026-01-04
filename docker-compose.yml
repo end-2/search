@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: rag-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    # networks:
+    #   - rag-network
+
+# networks:
+#   rag-network:
+#     driver: bridge
+

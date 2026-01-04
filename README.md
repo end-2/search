@@ -19,7 +19,7 @@
 
 ## 🛠 Tech Stack
 - **LLM**: OpenAI API (GPT-4o, text-embedding-3-small)
-- **Framework**: LangChain / LlamaIndex (Orchestration)
+- **Framework**: LlamaIndex (Orchestration)
 - **Vector DB**: Qdrant (Self-hosted / Hybrid Search)
 - **Backend**: Python (FastAPI)
 
